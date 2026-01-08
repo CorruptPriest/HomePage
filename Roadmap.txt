@@ -1,0 +1,43 @@
+ANTIGRAVITY IDE - FUTURE ROADMAP
+
+=== CORE FEATURES ===
+
+[ ] Custom Theming Engine
+    - Allow users to define their own hex colors for background, text, and accents.
+    - Command: `theme set --bg #000 --accent #f0f`.
+
+=== TERMINAL ENHANCEMENTS ===
+[ ] Command Aliases
+    - User-defined shortcuts (e.g., `yt` -> `youtube`, `g` -> `google`).
+    - Command: `alias [name] [command]`.
+
+[ ] Multi-Tab Terminal
+    - Switch between different terminal sessions or "processes".
+    - Status bar indicator for active session.
+
+[ ] History Expansion
+    - Persistent command history across reloads (up arrow navigation).
+    - `history` command to view past inputs.
+
+=== WIDGETS & TOOLS ===
+[ ] ASCII Weather
+    - Fetch and display weather in ASCII art format.
+    - Command: `weather [city]`.
+
+[ ] Pomodoro Timer
+    - Productivity timer in the status bar or terminal.
+    - Command: `timer 25m`.
+
+
+=== FUN & EASTER EGGS ===
+[ ] Matrix Rain Mode
+    - Green falling code effect overlay.
+    - Command: `matrix`.
+
+[ ] Snake Game
+    - Playable Snake game inside the terminal output.
+    - Command: `snake`.
+
+[ ] Audio Player
+    - Embed a simple Lo-Fi player or YouTube controller.
+    - Command: `play [genre]`.
