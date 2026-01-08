@@ -1,6 +1,7 @@
-# Antigravity Start Page
 
-A dystopian, developer-focused start page that behaves like a code editor and terminal.
+# Prostmitwein's Start Page
+
+A nothing themed, developer-focused start page that behaves like a code editor and terminal.
 
 ## Features
 
