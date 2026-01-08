@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+    <!-- Matter.js for Physics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <link rel="stylesheet" href="style.css?v=27">
+</head>
+
+<body>
+
+    <div id="ide-container">
+        <aside id="sidebar">
+            <!-- Hidden File Input for "Files" icon -->
+            <input type="file" id="file-input" style="display: none;" />
+
+            <!-- Icons (SVG placeholders) -->
+            <div class="icon physics-target" title="Files (Ctrl+O)"
+                onclick="document.getElementById('file-input').click()">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M13 9V3.5L18.5 9M6 2C4.89 2 4 2.89 4 4V20C4 21.11 4.89 22 6 22H18C19.11 22 20 21.11 20 20V8L14 2H6Z" />
+                </svg>
+            </div>
+            <!-- Search Icon Removed -->
+            <div class="icon physics-target" title="Git (GitHub)" onclick="window.open('https://github.com', '_blank')">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M2.6,10.59L8.38,4.8L10.07,6.5C9.83,7.35 10.22,8.28 11,8.73V14.27C10.4,14.61 10,15.26 10,16A2,2 0 0,0 12,18A2,2 0 0,0 14,16C14,15.26 13.6,14.61 13,14.27V9.41L15.07,11.5C15,11.65 15,11.82 15,12A2,2 0 0,0 17,14A2,2 0 0,0 19,12A2,2 0 0,0 17,10C16.82,10 16.65,10 16.5,10.07L13.93,7.5C14.27,6.9 14.61,6.5 15.27,6.5C16.03,6.5 16.65,7.12 16.65,7.88C16.65,8.64 16.03,9.26 15.27,9.26C14.5,9.26 13.88,8.64 13.88,7.88C13.88,7.12 14.5,6.5 15.27,6.5H16.5V4.26L10.8,2.38C10.23,2.19 9.62,2.38 9.24,2.76L2.6,9.41C2.22,9.79 2.22,10.4 2.6,10.59Z" />
+                </svg>
+            </div>
+            <div class="icon physics-target" title="Extensions (Web Store)"
+                onclick="window.open('https://chromewebstore.google.com/category/extensions', '_blank')">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M20.5,11H19V7C19,5.89 18.1,5 17,5H13V3.5A2.5,2.5 0 0,0 10.5,1A2.5,2.5 0 0,0 8,3.5V5H4C2.89,5 2,5.89 2,7V11H3.5A2.5,2.5 0 0,0 6,13.5A2.5,2.5 0 0,0 3.5,16H2V20C2,21.11 2.89,22 4,22H8V20.5A2.5,2.5 0 0,0 10.5,18A2.5,2.5 0 0,0 13,20.5V22H17C18.1,22 19,21.11 19,20V16H20.5A2.5,2.5 0 0,0 23,13.5A2.5,2.5 0 0,0 20.5,11M14,11V13H10V11H14Z" />
+                </svg>
+            </div>
+            <div class="icon physics-target glitch-hover" title="Settings" onclick="toggleSettings()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+                </svg>
+            </div>
+        </aside>
+
+        <main id="editor">
+            <!-- Dynamic content will be injected here -->
+        </main>
+
+        <!-- Secondary Input Overlay -->
+        <div id="main-input-overlay" class="hidden">
+            <div class="input-container">
+                <span class="input-prompt">Search:</span>
+                <input type="text" id="main-search-input" placeholder="Type to search..." autocomplete="off">
+                <div class="search-options">
+                    <span class="option"><b>[G]</b>oogle</span>
+                    <span class="option"><b>[D]</b>uckDuckGo</span>
+                    <span class="option"><b>[M]</b> Gemini</span>
+                    <span class="option"><b>[A]</b>I Overview</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes Gallery -->
+        <div id="notes-gallery">
+            <!-- Notes will be injected here -->
+        </div>
+
+        <!-- Note Modal (Main View) -->
+        <div id="note-modal-overlay" class="hidden">
+            <div class="note-modal-content">
+                <div class="note-modal-header">
+                    <div class="note-modal-id">#0000</div>
+                    <div class="note-modal-close" onclick="closeNoteModal()">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path
+                                d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="note-modal-body">
+                    <!-- Content here -->
+                </div>
+                <div class="note-modal-footer">
+                    <span class="note-modal-time">Just now</span>
+                    <span class="note-modal-hint">Type 'note -ID' to edit</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Panel -->
+        <div id="settings-panel">
+            <div class="settings-header">Appearance</div>
+
+            <div class="setting-item">
+                <span class="setting-label">Theme (Light)</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-theme" onchange="updateSettings()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="setting-item">
+                <span class="setting-label">Accent (Yellow)</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-accent" onchange="updateSettings()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="setting-item">
+                <span class="setting-label">Dots</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-dots" checked onchange="updateSettings()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="setting-item">
+                <span class="setting-label">Glaze (Gold)</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-glaze" onchange="updateSettings()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="setting-item">
+                <span class="setting-label">Tint (Glass/Noise)</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-tint" onchange="updateSettings()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <footer id="terminal-panel" class="physics-target">
+        <div class="terminal-header">
+            <div class="terminal-tab active">Terminal</div>
+            <div class="terminal-tab">Output</div>
+            <div class="terminal-tab">Debug Console</div>
+        </div>
+        <div id="terminal-output"></div>
+        <div id="terminal-input-line">
+            <span class="prompt">➜ ~</span>
+            <input type="text" id="command-input" placeholder="Type 'gravity' to start..." autocomplete="off"
+                spellcheck="false">
+        </div>
+    </footer>
+
+    <script src="script.js?v=27"></script>
+</body>
+
+</html>

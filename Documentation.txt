@@ -1,0 +1,67 @@
+ANTIGRAVITY START PAGE - CODEBASE DOCUMENTATION
+
+=== OVERVIEW ===
+This project is a personal start page designed to look like a code editor/terminal hybrid.
+It uses "lazy" naming conventions (e.g., 'tick' for time update, 'go' for search) to keep the code concise and "human".
+
+=== DEPENDENCIES ===
+1. Matter.js (v0.19.0)
+   - Used for the physics engine (gravity mode).
+   - Loaded via CDN in index.html.
+   - Entry point: startPhys() function in script.js.
+
+=== FILE STRUCTURE ===
+- index.html: Main layout (Editor, Sidebar, Terminal, Modals).
+- style.css: All styling, including themes (Light/Dark), accents, and glassmorphism effects.
+- script.js: Core logic.
+
+=== CORE FUNCTIONS (script.js) ===
+
+1. CONFIGURATION
+   - `links`: Object containing bookmark URLs (reddit, github, etc.).
+   - `opts`: Object storing user settings (theme, accent, dots, glaze, tint).
+
+2. EDITOR / CLOCK (`tick`)
+   - `tick()`: Runs every second. Updates the "code" in the main view.
+   - It renders the header comments (Dystopian quote), date, time, and imports.
+   - It also renders the `links` object as code lines.
+   - `row(content, num)`: Helper to generate a line of "code" with a line number.
+
+3. SETTINGS (`updateOpts`, `applyOpts`)
+   - Manages the visual appearance.
+   - Saves state to `localStorage` ('antigravity_settings').
+   - Toggles classes on `document.body` (e.g., .theme-light, .accent-yellow).
+
+4. NOTES SYSTEM (`class Notes`)
+   - `Notes`: Class handling CRUD operations for notes.
+   - Storage: `localStorage` ('antigravity_notes').
+   - `add(text)`: Creates a note with a random 4-digit ID.
+   - `edit(id, text)`: Updates content and timestamp.
+   - `del(id)`: Deletes a note.
+   - `draw()`: Renders notes to the #notes-gallery.
+   - `esc(t)`: Simple HTML escaping helper.
+
+5. TERMINAL (`cmd`, `say`, `boot`)
+   - `boot()`: Initializes the terminal, loads history from `sessionStorage`.
+   - `say(text, type)`: Logs a message to the terminal output.
+   - `cmd(raw)`: Parses user input.
+     - Checks `links` for bookmarks.
+     - Checks commands: 'gravity', 'clear', 'reset', 'help', 'note'.
+     - Fallback: Calls `askSearch` for search engine selection.
+
+6. SEARCH (`askSearch`, `go`)
+   - `askSearch(q)`: Enters SEARCH mode, prompting for an engine (G, D, M, A, Y, I, S).
+   - `go(eng, q)`: Constructs the URL for the chosen engine and opens it.
+     - Handles special cases like Gemini (?text=) and YouTube Music.
+
+7. PHYSICS (`startPhys`)
+   - Uses Matter.js.
+   - Creates physical bodies for all elements with class `.physics-target`.
+   - Adds walls/floor/ceiling to keep elements on screen.
+   - Allows mouse interaction (throwing elements).
+
+=== STYLING (style.css) ===
+- Variables: Defined in `:root` and modified by theme classes.
+- Font: 'Courier New' for that raw dev feel.
+- Glassmorphism: Heavy use of `backdrop-filter: blur()`.
+- Scrollbars: Custom "blocky" scrollbars to match the aesthetic.
