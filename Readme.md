@@ -1,6 +1,7 @@
 
 # Prostmitwein's Start Page
-![asset1]
+![Prostmitwein's Start Page](asset1.png)
+
 A nothing themed, developer-focused start page that behaves like a code editor and terminal.
 
 ## Features
